@@ -17,6 +17,7 @@ package main
 import (
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/google/go-cmp/cmp"
 )
@@ -40,6 +41,27 @@ func TestConvert(t *testing.T) {
 			t.Parallel()
 			got := convert(c.p)
 			if diff := diff(c.want, string(got)); diff != "" {
+				t.Errorf("mismatch (-want +got):\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestNewTimepoint(t *testing.T) {
+	t.Parallel()
+	cases := []struct {
+		t    time.Time
+		want timepoint
+	}{
+		{time.Date(2000, 1, 2, 0, 59, 30, 0, time.UTC), timepoint{1, 0}},
+		{time.Date(2000, 1, 2, 23, 59, 30, 0, time.UTC), timepoint{0, 0}},
+	}
+	for _, c := range cases {
+		c := c
+		t.Run(c.t.String(), func(t *testing.T) {
+			t.Parallel()
+			got := newTimepoint(c.t)
+			if diff := diff(c.want, got); diff != "" {
 				t.Errorf("mismatch (-want +got):\n%s", diff)
 			}
 		})

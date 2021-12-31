@@ -56,10 +56,15 @@ type timepoint struct {
 
 func newTimepoint(t time.Time) timepoint {
 	progress := float64(t.Minute()) / 60
-	return timepoint{
+	p := timepoint{
 		hour:     t.Hour(),
 		interval: int(math.Round(progress * intervals)),
 	}
+	if p.interval >= intervals {
+		p.hour = (p.hour + 1) % 24
+		p.interval = 0
+	}
+	return p
 }
 
 // Add intervals
