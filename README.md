@@ -2,7 +2,7 @@
 
 anaclock prints a simple analog clock as a line of text.
 
-Demo:
+## Demo
 
     $ anaclock
     23  .  :  .| 00
@@ -16,6 +16,16 @@ Example values:
     12| .  :  .  13 # 12:05
     00 |.  :  .  01 # 00:10
     23  .  |  .  00 # 23:30
+
+## Installation
+
+To build yourself (requires Go):
+
+    go install go.felesatra.moe/anaclock@latest
+
+You can also download prebuilt binaries from https://github.com/darkfeline/anaclock/releases/
+
+## Why analog?
 
 Why use an analog clock?  Same reason we use graphs instead of a table
 of numbers; it's easier to visualize how much time has passed and how
